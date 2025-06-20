@@ -210,6 +210,44 @@
       <button type="submit">Submit Assessment</button>
     </form>
   </div>
+<script>
+  document.getElementById("colorForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      conf_appearance: form.conf_appearance.value,
+      conf_colors: form.conf_colors.value,
+      conf_style: form.conf_style.value,
+      conf_awareness: form.conf_awareness.value,
+      conf_mood: form.conf_mood.value,
+      conf_shopping: form.conf_shopping.value,
+      conf_identity: form.conf_identity.value,
+      conf_brand: form.conf_brand.value,
+      style_desc: form.style_desc.value,
+      favorite_colors: form.favorite_colors.value,
+      avoid_colors: form.avoid_colors.value,
+      goals: form.goals.value,
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwLIIXW06XV1SMpYpbfXoZt-Fkv1AmQuLuERZxDVKLuo3Crp7FxPFLWpVR2pQrnyyUd/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert("Thank you! Your form has been submitted successfully.");
+      form.reset();
+    })
+    .catch(error => {
+      console.error("Error!", error.message);
+      alert("Something went wrong. Please try again.");
+    });
+  });
+</script>
 
 </body>
 </html>
